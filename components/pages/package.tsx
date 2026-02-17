@@ -1,28 +1,16 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
   CheckCircle2,
-  Clock,
-  MapPin,
-  Calendar,
-  Sun,
-  Car,
-  Home,
-  Ticket,
-  XCircle,
-  Mountain,
-  Compass,
   Star,
   MessageCircle,
   Phone,
   Send,
   ChevronRight,
 } from "lucide-react";
+import PackageTabs from "./PackageTabs";
 
 /* ================= TYPES ================= */
 
@@ -68,68 +56,16 @@ export type PackageData = {
   reviewCount: number;
 };
 
-type TabType =
-  | "overview"
-  | "highlights"
-  | "itinerary"
-  | "includes"
-  | "excludes"
-  | "map"
-  | "best-seasons"
-  | "packing"
-  | "faqs";
-
-/* ================= TABS CONFIG ================= */
-
-const TABS: { id: TabType; label: string; icon: React.ReactNode }[] = [
-  { id: "overview", label: "Overview", icon: <Mountain className="h-4 w-4" /> },
-  {
-    id: "highlights",
-    label: "Highlights",
-    icon: <Star className="h-4 w-4" />,
-  },
-  {
-    id: "itinerary",
-    label: "Itinerary",
-    icon: <Calendar className="h-4 w-4" />,
-  },
-  {
-    id: "includes",
-    label: "Includes",
-    icon: <CheckCircle2 className="h-4 w-4" />,
-  },
-  {
-    id: "excludes",
-    label: "Excludes",
-    icon: <XCircle className="h-4 w-4" />,
-  },
-  { id: "map", label: "Map", icon: <MapPin className="h-4 w-4" /> },
-  {
-    id: "best-seasons",
-    label: "Best Seasons",
-    icon: <Sun className="h-4 w-4" />,
-  },
-  {
-    id: "packing",
-    label: "Packing",
-    icon: <Compass className="h-4 w-4" />,
-  },
-  { id: "faqs", label: "FAQs", icon: <MessageCircle className="h-4 w-4" /> },
-];
-
-/* ================= MAIN COMPONENT ================= */
+/* ================= MAIN COMPONENT (SERVER) ================= */
 
 interface PackageProps {
   data: PackageData;
 }
 
 export default function Package({ data }: PackageProps) {
-  const [activeTab, setActiveTab] = useState<TabType>("overview");
   const primaryImage = data.images?.[0] || "/assets/mountain.jpg";
-
-  // Calculate price range (example: base price and +30% for smaller groups)
   const basePrice = data.price || 264;
-  const maxPrice = Math.round(basePrice * 1.31); // ~31% increase
+  const maxPrice = Math.round(basePrice * 1.31);
 
   return (
     <div className="w-full min-h-screen bg-background">
@@ -177,53 +113,9 @@ export default function Package({ data }: PackageProps) {
       {/* MAIN CONTENT — Two Column Layout */}
       <section className="max-w-7xl mx-auto px-6 py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 lg:gap-12">
-          {/* LEFT COLUMN — Tabbed Content */}
+          {/* LEFT COLUMN — Tabbed Content (Client Component) */}
           <div className="min-w-0">
-            {/* Tab Navigation */}
-            <div className="flex flex-wrap gap-2 mb-8 pb-4 border-b border-border overflow-x-auto">
-              {TABS.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`
-                    flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all
-                    ${
-                      activeTab === tab.id
-                        ? "bg-green-600 text-white shadow-sm hover:bg-green-700"
-                        : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
-                    }
-                  `}
-                >
-                  {tab.icon}
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Tab Content */}
-            <div className="prose prose-sm max-w-none">
-              {activeTab === "overview" && (
-                <OverviewTab data={data} />
-              )}
-              {activeTab === "highlights" && (
-                <HighlightsTab data={data} />
-              )}
-              {activeTab === "itinerary" && (
-                <ItineraryTab data={data} />
-              )}
-              {activeTab === "includes" && (
-                <IncludesTab data={data} />
-              )}
-              {activeTab === "excludes" && (
-                <ExcludesTab data={data} />
-              )}
-              {activeTab === "map" && <MapTab data={data} />}
-              {activeTab === "best-seasons" && (
-                <BestSeasonsTab data={data} />
-              )}
-              {activeTab === "packing" && <PackingTab data={data} />}
-              {activeTab === "faqs" && <FAQsTab data={data} />}
-            </div>
+            <PackageTabs data={data} />
           </div>
 
           {/* RIGHT COLUMN — Static Pricing Sidebar */}
@@ -236,298 +128,6 @@ export default function Package({ data }: PackageProps) {
           </div>
         </div>
       </section>
-    </div>
-  );
-}
-
-/* ================= TAB COMPONENTS ================= */
-
-function OverviewTab({ data }: { data: PackageData }) {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-2xl md:text-3xl font-bold text-green-700 mb-4">
-        Overview of {data.title}
-      </h2>
-      <div
-        className="text-muted-foreground leading-relaxed"
-        dangerouslySetInnerHTML={{ __html: data.fullDescription }}
-      />
-
-      {/* Summary Box */}
-      <Card className="bg-green-50/50 border-green-200/60">
-        <CardContent className="pt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <SummaryItem
-              icon={<Mountain className="h-5 w-5 text-green-700" />}
-              label="Destination"
-              value={data.title}
-            />
-            <SummaryItem
-              icon={<Clock className="h-5 w-5 text-green-700" />}
-              label="Duration"
-              value={data.duration || "N/A"}
-            />
-            <SummaryItem
-              icon={<Compass className="h-5 w-5 text-green-700" />}
-              label="Trip Grade"
-              value={data.difficultyLevel || "Moderate"}
-            />
-            <SummaryItem
-              icon={<Calendar className="h-5 w-5 text-green-700" />}
-              label="Start/End"
-              value={`${data.meetingPoint || "Kathmandu"}/${data.dropOffPoint || "Kathmandu"}`}
-            />
-            <SummaryItem
-              icon={<Sun className="h-5 w-5 text-green-700" />}
-              label="Best Seasons"
-              value="Spring (April-May) and Autumn (October-November)"
-            />
-            <SummaryItem
-              icon={<Car className="h-5 w-5 text-green-700" />}
-              label="Transport"
-              value="Private Car/Flight"
-            />
-            <SummaryItem
-              icon={<Home className="h-5 w-5 text-green-700" />}
-              label="Accommodation"
-              value="Teahouses/Lodges"
-            />
-            <SummaryItem
-              icon={<Ticket className="h-5 w-5 text-green-700" />}
-              label="Permits"
-              value="Sagarmatha National Park Entry Permit, Khumbu Pasang Lhamu Rural Municipality Permit, TIMS Card"
-            />
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
-
-function HighlightsTab({ data }: { data: PackageData }) {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-2xl md:text-3xl font-bold text-green-700 mb-4">
-        Highlights of {data.title.split(" ")[0]} Trek
-      </h2>
-      <ul className="space-y-3">
-        {data.highlights?.map((highlight, idx) => (
-          <li
-            key={idx}
-            className="flex items-start gap-3 group hover:bg-muted/50 p-2 rounded-lg transition-colors"
-          >
-            <span className="mt-0.5 h-2 w-2 rounded-full bg-orange-500 shrink-0" />
-            <span
-              className="text-muted-foreground flex-1"
-              dangerouslySetInnerHTML={{ __html: highlight }}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function ItineraryTab({ data }: { data: PackageData }) {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-2xl md:text-3xl font-bold text-green-700 mb-4">
-        Itinerary
-      </h2>
-      <div className="space-y-6">
-        {data.itinerary?.map((item, idx) => (
-          <div
-            key={idx}
-            className="flex gap-4 group hover:bg-muted/30 p-4 rounded-lg transition-colors"
-          >
-            <div className="flex flex-col items-center shrink-0">
-              <div className="h-10 w-10 rounded-full bg-green-600 text-white flex items-center justify-center font-bold text-sm group-hover:bg-green-700 transition-colors">
-                {item.day}
-              </div>
-              {idx < (data.itinerary?.length || 0) - 1 && (
-                <div className="w-0.5 h-full bg-border mt-2" />
-              )}
-            </div>
-            <div className="flex-1 pb-6">
-              <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-              <div
-                className="text-muted-foreground leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: item.description }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function IncludesTab({ data }: { data: PackageData }) {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-2xl md:text-3xl font-bold text-green-700 mb-4">
-        What's Included
-      </h2>
-      <ul className="space-y-3">
-        {data.inclusions?.map((item, idx) => (
-          <li
-            key={idx}
-            className="flex items-start gap-3 group hover:bg-green-50/50 p-3 rounded-lg transition-colors"
-          >
-            <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
-            <span
-              className="text-muted-foreground flex-1"
-              dangerouslySetInnerHTML={{ __html: item }}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function ExcludesTab({ data }: { data: PackageData }) {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-2xl md:text-3xl font-bold text-green-700 mb-4">
-        What's Excluded
-      </h2>
-      <ul className="space-y-3">
-        {data.exclusions?.map((item, idx) => (
-          <li
-            key={idx}
-            className="flex items-start gap-3 group hover:bg-red-50/50 p-3 rounded-lg transition-colors"
-          >
-            <XCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
-            <span
-              className="text-muted-foreground flex-1"
-              dangerouslySetInnerHTML={{ __html: item }}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function MapTab({ data }: { data: PackageData }) {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-2xl md:text-3xl font-bold text-green-700 mb-4">
-        Route Map
-      </h2>
-      <div className="bg-muted rounded-lg p-8 text-center text-muted-foreground border border-border">
-        <MapPin className="h-12 w-12 mx-auto mb-4 text-green-600" />
-        <p>Map visualization will be displayed here.</p>
-        <p className="text-sm mt-2">
-          Locations: {data.locations?.join(", ") || "N/A"}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function BestSeasonsTab({ data }: { data: PackageData }) {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-2xl md:text-3xl font-bold text-green-700 mb-4">
-        Best Seasons
-      </h2>
-      <div className="space-y-4">
-        <div className="p-4 bg-green-50/50 rounded-lg border border-green-200/60">
-          <h3 className="font-semibold mb-2 flex items-center gap-2">
-            <Sun className="h-5 w-5 text-green-700" />
-            Spring (April - May)
-          </h3>
-          <p className="text-muted-foreground text-sm">
-            Ideal weather conditions with clear skies and moderate temperatures.
-            Perfect for trekking with excellent mountain views.
-          </p>
-        </div>
-        <div className="p-4 bg-green-50/50 rounded-lg border border-green-200/60">
-          <h3 className="font-semibold mb-2 flex items-center gap-2">
-            <Sun className="h-5 w-5 text-green-700" />
-            Autumn (October - November)
-          </h3>
-          <p className="text-muted-foreground text-sm">
-            Stable weather, clear visibility, and comfortable temperatures.
-            Considered the best season for trekking in Nepal.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PackingTab({ data }: { data: PackageData }) {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-2xl md:text-3xl font-bold text-green-700 mb-4">
-        Packing List
-      </h2>
-      {data.whatToBring && data.whatToBring.length > 0 ? (
-        <ul className="space-y-3">
-          {data.whatToBring.map((item, idx) => (
-            <li
-              key={idx}
-              className="flex items-start gap-3 group hover:bg-muted/50 p-3 rounded-lg transition-colors"
-            >
-              <ChevronRight className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
-              <span className="text-muted-foreground">{item}</span>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div className="space-y-3">
-          <PackingCategory title="Clothing" items={["Base layers", "Insulating layers", "Outer shell", "Trekking pants", "Underwear", "Socks"]} />
-          <PackingCategory title="Footwear" items={["Trekking boots", "Camp shoes", "Gaiters"]} />
-          <PackingCategory title="Equipment" items={["Backpack", "Sleeping bag", "Headlamp", "Water bottles", "Trekking poles"]} />
-          <PackingCategory title="Personal Items" items={["First aid kit", "Sunscreen", "Sunglasses", "Personal toiletries"]} />
-        </div>
-      )}
-    </div>
-  );
-}
-
-function PackingCategory({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div className="p-4 bg-muted/30 rounded-lg border border-border">
-      <h3 className="font-semibold mb-2">{title}</h3>
-      <ul className="space-y-2">
-        {items.map((item, idx) => (
-          <li key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-            <ChevronRight className="h-4 w-4 text-green-600" />
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function FAQsTab({ data }: { data: PackageData }) {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-2xl md:text-3xl font-bold text-green-700 mb-4">
-        Frequently Asked Questions
-      </h2>
-      <div className="space-y-4">
-        {data.faqs && data.faqs.length > 0 ? (
-          data.faqs.map((faq, idx) => (
-            <Card key={idx} className="hover:shadow-md transition-shadow">
-              <CardContent className="pt-6">
-                <h3 className="font-semibold mb-2 text-lg">{faq.question}</h3>
-                <div
-                  className="text-muted-foreground leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: faq.answer }}
-                />
-              </CardContent>
-            </Card>
-          ))
-        ) : (
-          <p className="text-muted-foreground">No FAQs available at this time.</p>
-        )}
-      </div>
     </div>
   );
 }
@@ -553,7 +153,9 @@ function PricingSidebar({
               PRICE PER PERSON
             </p>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-green-700">${price}</span>
+              <span className="text-3xl font-bold text-green-700">
+                ${price}
+              </span>
               <span className="text-xl text-muted-foreground line-through">
                 ${maxPrice}
               </span>
@@ -634,29 +236,5 @@ function PricingSidebar({
         </div>
       </CardContent>
     </Card>
-  );
-}
-
-/* ================= HELPER COMPONENTS ================= */
-
-function SummaryItem({
-  icon,
-  label,
-  value,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="flex items-start gap-3 group hover:bg-white/50 p-2 rounded transition-colors">
-      <div className="shrink-0 mt-0.5">{icon}</div>
-      <div className="min-w-0 flex-1">
-        <p className="text-xs font-medium text-muted-foreground mb-0.5">
-          {label}
-        </p>
-        <p className="text-sm text-foreground leading-relaxed">{value}</p>
-      </div>
-    </div>
   );
 }

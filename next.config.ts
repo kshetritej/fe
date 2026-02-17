@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "api.growfore.com",
         pathname: "/api/v1/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "api.hinepaltreks.com",
+        pathname: "/**",
+      },
     ],
   },
 };
