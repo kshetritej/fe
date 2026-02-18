@@ -54,6 +54,13 @@ export type PackageData = {
   faqs: FAQ[];
   averageRating: number;
   reviewCount: number;
+  banner?: string;
+  highlightsHtml?: string;
+  faqsHtml?: string;
+  bestSeason?: string;
+  accommodation?: string;
+  transportation?: string;
+  tripGrade?: string;
 };
 
 /* ================= MAIN COMPONENT (SERVER) ================= */
