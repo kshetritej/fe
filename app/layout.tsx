@@ -9,6 +9,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Essence Treks",
   description: "Created by Growfore Solution",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function RootLayout({

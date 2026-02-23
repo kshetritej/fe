@@ -39,20 +39,16 @@ function mapApiToPackageData(pkg: any, slug: string): PackageData {
         ? pkg.altitudeInfo.map((item: any, idx: number) => ({
             day: item.day ?? idx + 1,
             title: item.title ?? item.place ?? `Day ${idx + 1}`,
-            description:
-              item.description ?? item.altitude ?? item.detail ?? "",
+            description: item.description ?? item.altitude ?? item.detail ?? "",
           }))
         : [],
     meetingPoint: pkg.meetingPoint ?? "",
     dropOffPoint: pkg.dropOffPoint ?? "",
     whatToBring: Array.isArray(pkg.whatToBring) ? pkg.whatToBring : [],
-    additionalInfo: Array.isArray(pkg.additionalInfo)
-      ? pkg.additionalInfo
-      : [],
+    additionalInfo: Array.isArray(pkg.additionalInfo) ? pkg.additionalInfo : [],
     difficultyLevel: pkg.tripGrade ?? pkg.difficultyLevel ?? "",
     faqs: Array.isArray(pkg.faqs) ? pkg.faqs : [],
-    faqsHtml:
-      typeof pkg.goodtoknow === "string" ? pkg.goodtoknow : undefined,
+    faqsHtml: typeof pkg.goodtoknow === "string" ? pkg.goodtoknow : undefined,
     averageRating: pkg.averageRating ?? 0,
     reviewCount: pkg.reviewCount ?? 0,
     banner: pkg.banner ?? "",
