@@ -1,6 +1,4 @@
 import TripCard from "../card/trip-card";
-import { Button } from "../ui/button";
-import Image from "next/image";
 
 export default async function FeaturedSections() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/activity`);
@@ -34,9 +32,9 @@ export default async function FeaturedSections() {
       </p>
       {/*<Button className="w-fit">Learn More</Button>*/}
       <div className="grid grid-cols-3 gap-4">
-        {Array.from({ length: 5 }).map((_, index) => {
-          return <TripCard key={trips[0].id} trip={trips[0]} />;
-        })}
+        {trips.map((trip: any, index: number) => (
+          <TripCard key={trip.id} trip={trip} />
+        ))}
       </div>
     </div>
   );

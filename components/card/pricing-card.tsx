@@ -7,9 +7,10 @@ import {
   CheckCircle2,
   MessageCircle,
   Phone,
-  Send,
   ChevronRight,
+  LucideSend,
 } from "lucide-react";
+import { siteConfig } from "@/lib/siteConfig";
 export default function PricingCardSidebar({
   price,
   maxPrice,
@@ -47,15 +48,8 @@ export default function PricingCardSidebar({
               className="w-full h-12 text-base font-semibold shadow-sm"
               size="lg"
             >
-              BOOK THIS TRIP
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full h-12 text-base font-semibold"
-              size="lg"
-            >
-              <Send className="h-5 w-5" />
-              SEND INQUIRY
+              <LucideSend />
+              Send a Booking Inquiry
             </Button>
           </div>
 
@@ -79,7 +73,7 @@ export default function PricingCardSidebar({
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-primary/90">WhatsApp</p>
                 <p className="text-xs text-primary/70 truncate">
-                  +977 9841328947
+                  {siteConfig.whatsAppNumber || "+977-9804148802"}
                 </p>
               </div>
               <ChevronRight className="h-5 w-5 text-primary/70 shrink-0" />

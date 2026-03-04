@@ -3,7 +3,7 @@ export const siteConfig = {
   description: "Conquer the Roof of the World, One Step at a Time!",
   url: "https://essencetreksnepal.com",
   image: "/og.png",
-  whatsAppNumber: "+9779804148802",
+  whatsAppNumber: "+977 9804148802",
   phoneNumbers: [
     { phone: "+977-9804148802" },
     { tel: "+061-452788" },
