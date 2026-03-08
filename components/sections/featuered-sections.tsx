@@ -8,7 +8,7 @@ export default async function FeaturedSections() {
   const trips = data?.data;
 
   return (
-    <div className="relative flex flex-col gap-4  min-h-[70vh] justify-center container mx-auto mt-12">
+    <div className="relative flex flex-col gap-4  min-h-[70vh] justify-center container mx-auto mt-12 p-2">
       {/*<Image
         height={200}
         width={200}
@@ -31,7 +31,7 @@ export default async function FeaturedSections() {
         unforgettable trip. Let’s plan your next journey.
       </p>
       {/*<Button className="w-fit">Learn More</Button>*/}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid  md:grid-cols-3 gap-4">
         {trips.map((trip: any, index: number) => (
           <TripCard key={trip.id} trip={trip} />
         ))}

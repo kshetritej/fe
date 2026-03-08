@@ -1,6 +1,3 @@
-// components/MobileMenuItem.tsx
-// CLIENT COMPONENT — only the expand/collapse accordion state lives here.
-
 "use client";
 
 import { useState } from "react";
@@ -47,7 +44,7 @@ export function MobileMenuItem({ item, level = 0 }: MobileMenuItemProps) {
         ) : (
           <Link
             href={item.url || "#"}
-            className={`flex-1 block ${indent} py-3 font-semibold text-gray-900 hover:bg-orange-50 hover:text-orange-600 transition-colors`}
+            className={`flex-1 block ${indent} py-3 font-semibold text-gray-900  hover:text-orange-600 transition-colors`}
           >
             {item.label}
           </Link>
@@ -55,7 +52,7 @@ export function MobileMenuItem({ item, level = 0 }: MobileMenuItemProps) {
       </div>
 
       {isExpanded && hasChildren && (
-        <div className="bg-gray-50">
+        <div className="bg-gray-50 pl-6">
           {item.children.map((child) => (
             <MobileMenuItem key={child.id} item={child} level={level + 1} />
           ))}

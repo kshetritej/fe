@@ -1,5 +1,5 @@
 import { siteConfig } from "@/lib/siteConfig";
 
 export default function Logo() {
-  return <div>{siteConfig.name}</div>;
+  return <div className="font-bold text-lg">{siteConfig.name}</div>;
 }

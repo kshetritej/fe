@@ -1,12 +1,9 @@
-// components/MobileMenu.tsx
-// CLIENT COMPONENT — only the mobile open/close toggle lives here.
-// The menu data is passed in as props (already fetched by the server).
-
 "use client";
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { MobileMenuItem } from "./mobile-menu-item";
+import { Button } from "./ui/button";
 
 type MenuItem = {
   id: string;
@@ -25,7 +22,8 @@ export function MobileMenu({ items }: MobileMenuProps) {
   return (
     <>
       {/* Hamburger button */}
-      <button
+      <Button
+        variant={"ghost"}
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
@@ -36,7 +34,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
         ) : (
           <Menu size={24} className="text-gray-900" />
         )}
-      </button>
+      </Button>
 
       {/* Slide-down panel */}
       {isOpen && (
