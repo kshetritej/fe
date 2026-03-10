@@ -21,8 +21,8 @@ export default function PricingCardSidebar({
   title: string;
 }) {
   return (
-    <Card className="sticky top-8 border border-primary/60 rounded-sm">
-      <CardContent className="pt-6">
+    <Card className="sticky top-16 border border-primary/60 rounded-sm">
+      <CardContent className="">
         <div className="space-y-6">
           <p className="font-bold text-xl">{title}</p>
           <div>
@@ -31,9 +31,9 @@ export default function PricingCardSidebar({
             </p>
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-bold text-primary">${price}</span>
-              <span className="text-xl text-muted-foreground line-through">
+              {/*<span className="text-xl text-muted-foreground line-through">
                 ${maxPrice}
-              </span>
+              </span>*/}
             </div>
             <p className="text-xs text-muted-foreground mt-2">
               (Price varies by group size)
@@ -43,18 +43,19 @@ export default function PricingCardSidebar({
           <Separator />
 
           {/* Action Buttons */}
+          <div>For questions or booking inquiries</div>
           <div className="space-y-3">
-            <Button
-              className="w-full h-12 text-base font-semibold shadow-sm"
-              size="lg"
-            >
-              <LucideSend />
-              Send a Booking Inquiry
-            </Button>
+            <Link href={"/contact"}>
+              <Button
+                className="w-full h-12 text-base font-semibold shadow-sm"
+                size="lg"
+              >
+                <LucideSend />
+                Contact us
+              </Button>
+            </Link>
           </div>
-
           <Separator />
-
           {/* Expert Contact */}
           <div>
             <p className="text-sm font-semibold mb-3 flex items-center gap-2">
@@ -78,28 +79,6 @@ export default function PricingCardSidebar({
               </div>
               <ChevronRight className="h-5 w-5 text-primary/70 shrink-0" />
             </Link>
-          </div>
-
-          <Separator />
-
-          {/* Additional Info */}
-          <div className="text-xs text-muted-foreground space-y-2">
-            <p className="flex items-start gap-2">
-              <CheckCircle2 className="h-4 w-4 text-primary/60 shrink-0 mt-0.5" />
-              Hassle Free Booking
-            </p>
-            <p className="flex items-start gap-2">
-              <CheckCircle2 className="h-4 w-4 text-primary/60 shrink-0 mt-0.5" />
-              Seamless Communication
-            </p>
-            <p className="flex items-start gap-2">
-              <CheckCircle2 className="h-4 w-4 text-primary/60 shrink-0 mt-0.5" />
-              Secure Payments
-            </p>
-            <p className="flex items-start gap-2">
-              <CheckCircle2 className="h-4 w-4 text-primary/60 shrink-0 mt-0.5" />
-              No Hidden Fees
-            </p>
           </div>
         </div>
       </CardContent>

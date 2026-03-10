@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronDown, Mail, Phone, Globe } from "lucide-react";
+import { ChevronDown, Mail, Phone } from "lucide-react";
 import { MobileMenu } from "./mobile-menu";
 import { siteConfig } from "@/lib/siteConfig";
 import Logo from "./logo";
@@ -41,27 +41,27 @@ async function fetchMenu(): Promise<MenuItem[]> {
 const hasChildren = (item: MenuItem) =>
   Array.isArray(item.children) && item.children.length > 0;
 
-// ─── Desktop: Mega-menu dropdown (server JSX) ─────────────────────────────
-
 function MegaMenu({ item }: { item: MenuItem }) {
   if (!hasChildren(item)) return null;
 
   return (
-    <div className="absolute left-0 right-0 top-full w-fit  bg-white shadow-xl border-t border-gray-100 hidden group-hover:block z-50">
+    <div className="absolute  left-0 right-0 top-26 w-screen bg-white shadow-xl border-gray-100 hidden group-hover:block z-50">
       <div className="max-w-7xl mx-auto px-8 py-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">{item.label}</h2>
+        <div className="text-3xl font-bold text-gray-900 mb-8">
+          {item.label}
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {item.children.map((child) => (
             <div key={child.id}>
               <div className="mb-4">
                 {hasChildren(child) ? (
-                  <span className="text-lg font-semibold text-gray-900 block pb-2 border-b-2 border-primary/60">
+                  <span className="font-semibold text-gray-900 block pb-2 hover:text-primary hover:underline">
                     {child.label}
                   </span>
                 ) : (
                   <Link
                     href={child.url || "#"}
-                    className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors block pb-2 border-b-2 border-primary"
+                    className="text-lg font-semibold text-gray-900 hover:text-primary hover:underline transition-colors block pb-2"
                   >
                     {child.label}
                   </Link>
@@ -73,7 +73,7 @@ function MegaMenu({ item }: { item: MenuItem }) {
                     <li key={subChild.id}>
                       <Link
                         href={subChild.url || "#"}
-                        className="text-gray-700 hover:text-primary transition-colors text-sm"
+                        className="text-gray-700 hover:text-primary hover:underline transition-colors"
                       >
                         {subChild.label}
                       </Link>
@@ -93,9 +93,9 @@ function DesktopNavItem({ item }: { item: MenuItem }) {
   const dropdown = hasChildren(item);
 
   return (
-    <div className="relative group">
+    <div className="group">
       {dropdown ? (
-        <button className="flex items-center gap-1 px-4 py-3 font-semibold text-sm text-gray-900 hover:text-primary group-hover:text-primary transition-colors">
+        <button className="flex items-center gap-1 px-4 py-3 font-semibold  text-gray-900 hover:text-primary group-hover:text-primary transition-colors">
           {item.label}
           <ChevronDown
             size={16}

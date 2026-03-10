@@ -120,7 +120,7 @@ export default async function TripPage({
               ))}
             </div>
             <Button className="absolute top-2 left-2" variant={"secondary"}>
-              <LucideImage /> {trip.images.length} Photos
+              <LucideImage /> {trip.images.length} Photo(s)
             </Button>
           </div>
         </Lightbox>
@@ -137,7 +137,7 @@ export default async function TripPage({
       prose-base leading leading-relaxed
       prose-headings:text-gray-900 prose-headings:font-bold
       prose-h1:text-3xl
-      prose-h2:text-2xl   prose-h2:font-bold
+      prose-h2:text-3xl   prose-h2:font-bold
       prose-h3:text-xl
       prose-h4:text-lg
       prose-p:leading-relaxed prose-p:mb-4 prose-p:mt-0 prose-p:text-xl
