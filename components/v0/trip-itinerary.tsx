@@ -55,9 +55,7 @@ export function TripItinerary({ trip }: TripItineraryProps) {
             {trip.itinerary.map((day, index) => (
               <AccordionItem key={index} value={index.toString()}>
                 <AccordionTrigger className="font-bold text-md p-0 flex items-center prose-h3:p-0 prose-h3:m-0 prose-h3:leading-0 hover:no-underline">
-                  <h3 className="flex items-center gap-4">
-                    <Badge>Day {index + 1}</Badge> {day.title}
-                  </h3>
+                  <h3 className="flex items-center gap-4">{day.title}</h3>
                 </AccordionTrigger>
                 <AccordionContent className="text-base">
                   <div

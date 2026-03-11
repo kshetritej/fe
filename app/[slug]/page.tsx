@@ -95,22 +95,22 @@ export default async function TripPage({
 
       {/*Images in Lightbox*/}
       {trip.images && trip.images.length > 0 && (
-        <Lightbox images={trip.images}>
+        <Lightbox images={trip.images} keywords={trip.keywords || []}>
           <div className="grid md:grid-cols-3 gap-2 container mx-auto relative">
             <div className="rounded-sm overflow-hidden col-span-2">
               <Image
                 src={mainImage}
-                alt={trip.title}
+                alt={trip.keywords[0] || trip.title}
                 height={1280}
                 width={1920}
                 className="w-full h-full object-cover rounded-sm"
               />
             </div>
             <div className="col-span-1 gap-2 hidden md:grid">
-              {otherImages.map((imageUrl: string) => (
+              {otherImages.map((imageUrl: string, index: number) => (
                 <div key={imageUrl} className="rounded-sm overflow-hidden">
                   <Image
-                    alt={trip.title + "2"}
+                    alt={trip.keywords[index + 1] || trip.title + "2"}
                     src={imageUrl}
                     height={1280}
                     width={1920}
