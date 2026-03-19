@@ -1,96 +1,97 @@
 import { siteConfig } from "@/lib/siteConfig";
-import Logo from "./logo";
-import Link from "next/link";
-import { title } from "process";
-
-const quickLinks = [
-  { title: "Home", link: "/" },
-  { title: "Trekkings", link: "#" },
-  { title: "About", link: "/about" },
-  { title: "Contact", link: "/contact" },
-];
-
-const socials = [
-  { title: "Facebook", value: siteConfig.socials.facebook },
-  { title: "Instagram", value: siteConfig.socials.instagram },
-  { title: "Youtube", value: siteConfig.socials.youtube },
-];
+import { LucideMail, LucideMapPin, LucidePhone } from "lucide-react";
+import { CgFacebook, CgInstagram, CgTwitter, CgYoutube } from "react-icons/cg";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <Logo />
-            <p className="text-slate-400 text-sm">{siteConfig.description}</p>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Navigation</h4>
-            <ul className="space-y-2 text-sm">
-              {quickLinks.map((link, index) => {
-                return (
-                  <li key={link.link + index}>
-                    <Link
-                      href={link.link}
-                      className="text-slate-400 hover:text-white transition"
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="font-semibold mb-4">Get in Touch</h4>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li>{siteConfig.email}</li>
-              <li>{siteConfig.phoneNumbers[0].phone}</li>
-              <li>{siteConfig.fullAddress}</li>
-            </ul>
-          </div>
-
-          {/* Social Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Follow Us</h4>
-            <ul className="space-y-2 text-sm">
-              {socials.map((social, index) => {
-                return (
-                  <li key={social.value + index}>
-                    <Link
-                      href={social.value}
-                      className="text-slate-400 hover:text-primary transition"
-                    >
-                      {social.title}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+    <div className="bg-black">
+      <div className="flex  flex-col-reverse gap-8 lg:grid lg:grid-cols-4 container mx-auto text-white py-12 px-4">
+        <div>
+          <h3 className="font-black text-xl">Best Seller</h3>
+          <ul className="flex gap-2 flex-col">
+            <li>Langtang Valley Trek</li>
+            <li>Langtang Valley Trek</li>
+            <li>Langtang Valley Trek</li>
+            <li>Langtang Valley Trek</li>
+          </ul>
         </div>
 
-        {/* Bottom Section */}
-        <div className="border-t border-slate-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
-          <p>
-            &copy; {new Date().getFullYear() + " "}
-            {siteConfig.name}. All rights reserved.
-          </p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <Link href="#" className="hover:text-white transition">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="hover:text-white transition">
-              Terms of Service
-            </Link>
+        <div>
+          <h3 className="font-black text-xl">Main Activities</h3>
+          <ul className="flex gap-2 flex-col">
+            <li>Treeking in Nepal</li>
+            <li>Tours in Nepal</li>
+            <li>Day Tours in Nepal</li>
+            <li>Heli Tours in Nepal</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="font-black text-xl">Useful Links</h3>
+          <ul className="flex gap-2 flex-col">
+            <li>About us</li>
+            <li>Why us?</li>
+            <li>Equipment Checklist</li>
+            <li>Legal Documents</li>
+          </ul>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <h3 className="font-black text-xl">Essence Treks Nepal</h3>
+          <div className="flex items-start md:items-center gap-4">
+            <LucideMapPin className="size-8 md:size-10 text-primary" />{" "}
+            {siteConfig.fullAddress}
+          </div>
+          <div className="flex items-center gap-4">
+            <LucidePhone className="size-4 md:size-6 text-primary" />{" "}
+            {siteConfig.phoneNumbers[0].phone}
+          </div>
+          <div className="flex items-center gap-4">
+            <LucideMail className="size-4 md:size-6 text-primary" />{" "}
+            {siteConfig.email}
           </div>
         </div>
       </div>
-    </footer>
+      <div className="bg-amber-50">
+        <div className="container mx-auto py-12 grid md:grid-cols-2 gap-4 px-4">
+          <div>
+            <div className="font-black text-lg">Find us on</div>
+            <div className="flex gap-4 mt-4">
+              <CgFacebook className="size-4 md:size-8" />
+              <CgTwitter className="size-4 md:size-8" />
+              <CgInstagram className="size-4 md:size-8" />
+              <CgYoutube className="size-4 md:size-8" />
+            </div>
+          </div>
+          <div>
+            <div className="font-black text-lg">Associated With</div>
+            <div className="flex gap-4 mt-4">
+              <img
+                src={"https://www.moha.gov.np/static/nepal-government.png"}
+                className="object-contain w-40"
+              />
+              {/*<img
+                src={"https://www.taan.org.np/public/images/taan-logo.jpg"}
+                className="object-contain w-40"
+              />
+              <img
+                src={"https://www.taan.org.np/public/images/ntb.jpg"}
+                className="object-contain w-40"
+              />
+              <img
+                src={
+                  "https://www.nepalmountaineering.org/storage/website/logo-header.png"
+                }
+                className="object-contain w-40"
+              />*/}
+            </div>
+          </div>
+        </div>
+        <div className="p-4 items-center text-center">
+          &copy;Copyright {siteConfig.name} {new Date().getFullYear()}. All
+          rights reserved.
+        </div>
+      </div>
+    </div>
   );
 }

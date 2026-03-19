@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ChevronDown, Mail, Phone } from "lucide-react";
+import { ChevronDown, Mail } from "lucide-react";
 import { MobileMenu } from "./mobile-menu";
 import { siteConfig } from "@/lib/siteConfig";
 import Logo from "./logo";
+import { BsWhatsapp } from "react-icons/bs";
 
 type MenuItem = {
   id: string;
@@ -25,7 +26,6 @@ type MenuData = {
 async function fetchMenu(): Promise<MenuItem[]> {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/menu`, {
-      // Revalidate every 60 seconds (ISR-style). Use `cache: "no-store"` for always-fresh.
       next: { revalidate: 60 },
     });
 
@@ -45,8 +45,8 @@ function MegaMenu({ item }: { item: MenuItem }) {
   if (!hasChildren(item)) return null;
 
   return (
-    <div className="absolute  left-0 right-0 top-26 w-screen bg-white shadow-xl border-gray-100 hidden group-hover:block z-50">
-      <div className="max-w-7xl mx-auto px-8 py-12">
+    <div className="absolute  left-0 right-0 top-26 w-screen hidden group-hover:block z-50">
+      <div className="max-w-7xl mx-auto px-8 py-12 bg-amber-50/95 mt-5 rounded-b-xl">
         <div className="text-3xl font-bold text-gray-900 mb-8">
           {item.label}
         </div>
@@ -95,7 +95,7 @@ function DesktopNavItem({ item }: { item: MenuItem }) {
   return (
     <div className="group">
       {dropdown ? (
-        <button className="flex items-center gap-1 px-4 py-3 font-semibold  text-gray-900 hover:text-primary group-hover:text-primary transition-colors">
+        <button className="flex items-center gap-1 px-4 py-3 font-semibold  text-white hover:text-primary group-hover:text-primary transition-colors">
           {item.label}
           <ChevronDown
             size={16}
@@ -105,7 +105,7 @@ function DesktopNavItem({ item }: { item: MenuItem }) {
       ) : (
         <Link
           href={item.url || "#"}
-          className="block px-4 py-3 font-semibold text-sm text-gray-900 hover:text-primary transition-colors"
+          className="block px-4 py-3 font-semibold text-sm text-white hover:text-primary transition-colors"
         >
           {item.label}
         </Link>
@@ -121,30 +121,32 @@ export async function Navigation() {
   const items = await fetchMenu();
 
   return (
-    <nav className="bg-white">
+    <nav className="bg-black">
       {/* Top bar */}
-      <div className="bg-gray-900 text-white px-4 md:px-8 py-3 flex flex-wrap justify-center md:justify-end items-center gap-4 md:gap-8 text-xs md:text-sm">
-        <Link
-          href={`tel:${siteConfig.phoneNumbers[0].phone!}`}
-          className="flex items-center gap-2 hover:text-primary transition-colors"
-        >
-          <Phone size={16} />
-          <span className="hidden sm:inline">
-            {siteConfig.phoneNumbers[0].phone}
-          </span>
-        </Link>
-        <Link
-          href={`mailto:${siteConfig.email}`}
-          className="flex items-center gap-2 hover:text-primary transition-colors"
-        >
-          <Mail size={16} />
-          <span className="hidden sm:inline">info@example.com</span>
-        </Link>
+      <div className=" bg-white  px-4 md:px-8 py-3 flex flex-wrap justify-center md:justify-end items-center gap-4 md:gap-8 text-xs md:text-sm">
+        <div className="container mx-auto flex items-end gap-4 justify-end">
+          <Link
+            href={`tel:${siteConfig.phoneNumbers[0].phone!}`}
+            className="flex items-center gap-2 hover:text-primary transition-colors font-bold"
+          >
+            <BsWhatsapp className="text-primary" />
+            <span className="hidden sm:inline">
+              {siteConfig.phoneNumbers[0].phone}
+            </span>
+          </Link>
+          <Link
+            href={`mailto:${siteConfig.email}`}
+            className="flex items-center gap-2 hover:text-primary transition-colors font-bold"
+          >
+            <Mail size={16} className="text-primary" />
+            <span className="hidden sm:inline">info@essencetreksnepal.com</span>
+          </Link>
+        </div>
       </div>
 
       {/* Main bar */}
-      <div className="border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
+      <div>
+        <div className="container mx-auto px-4 md:px-8 py-1 flex items-center justify-between">
           <div className="shrink-0">
             <Logo />
           </div>

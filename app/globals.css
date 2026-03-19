@@ -190,6 +190,13 @@ table td:first-child {
     -ms-overflow-style: none; /* IE & Edge */
     scrollbar-width: none; /* Firefox */
 }
+.scrollbar-red {
+    scrollbar-color: red;
+    scrollbar-track-color: red;
+}
 .scrollbar-hide::-webkit-scrollbar {
     display: none; /* Chrome, Safari */
 }
+/** {
+    border: 1px solid red;
+}*/

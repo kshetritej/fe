@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Navigation } from "@/components/navigation";
-import Footer from "@/components/footer";
 import { Analytics } from "@vercel/analytics/next";
 import CTA from "@/components/cta";
-import { outfit } from "@/lib/font";
+import { nunitoSans, outfit } from "@/lib/font";
 import { siteConfig } from "@/lib/siteConfig";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Essence Treks",
@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.className} antialiased`}>
+      <body className={`${nunitoSans.className} antialiased`}>
         <Navigation />
         {children}
         <Analytics />
