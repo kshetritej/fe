@@ -18,7 +18,6 @@ const testimonials = [
   {
     name: "Swornim Mandal",
     review: `We had an amazing experience on our Annapurna Base Camp trek thanks to Sisir. He was incredibly supportive throughout the journey, always checking on us and making sure we were safe and comfortable. His knowledge of the trail, weather, and surroundings gave us a lot of confidence, especially on difficult days.
-
     What stood out the most was his attitude — always positive, patient, and eager to help with anything we needed. He didn’t just guide us to ABC, he made the whole journey enjoyable and stress-free. Highly recommend him and the agency to anyone planning this trek.`,
   },
   {
@@ -33,7 +32,6 @@ const testimonials = [
   {
     name: "Ali Marsland",
     review: `I really enjoyed my hike with Essence Tours. We started with sunrise at Sarangkot, which was a beautiful way to begin the day. Then we drove to Kande and walked up to Australian Camp. The trail was interesting and not too challenging, and the views from the top were absolutely worth it.
-
     We continued on through the peaceful Dhampus village, before heading back down. My guide, Santosh, was friendly, helpful, and kept a nice steady pace throughout. Overall, a lovely day out in nature with great scenery and just the right level of difficulty.`,
   },
   {
@@ -46,7 +44,7 @@ const testimonials = [
   },
   {
     name: "vuv won",
-    reviews: `I recently completed the ABC (Annapurna Base Camp) trek with Essence Tours and Travel, and I couldn’t be more satisfied with the experience. From the very beginning, everything was handled with great care and professionalism.
+    review: `I recently completed the ABC (Annapurna Base Camp) trek with Essence Tours and Travel, and I couldn’t be more satisfied with the experience. From the very beginning, everything was handled with great care and professionalism.
     Ajay Raj, the manager, is an absolutely amazing person. He managed every detail perfectly – from permits and transportation to accommodations and overall coordination. His dedication and personal touch made the trip smooth and stress-free.
     Our guide Pukar was equally impressive – highly experienced, professional, and friendly. His knowledge of the trail, safety awareness, and supportive attitude added so much value to the trek.
     If you’re planning a trekking adventure in Nepal, I highly recommend Essence Tours and Travel. They are truly reliable and make sure your journey is memorable for all the right reasons`,
