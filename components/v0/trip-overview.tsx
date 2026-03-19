@@ -13,6 +13,7 @@ import {
 import PricingCardSidebar from "../card/pricing-card";
 import { siteConfig } from "@/lib/siteConfig";
 import Link from "next/link";
+import TripAdvisorRatingBadge from "../tripadvisor-rating-badge";
 
 interface TripOverviewProps {
   trip: TripData;
@@ -20,23 +21,6 @@ interface TripOverviewProps {
 export function TripOverview({ trip }: TripOverviewProps) {
   return (
     <div id="overview" className="space-y-8 mt-4">
-      <div>
-        <h1 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-4">
-          {trip.title}
-        </h1>
-        <div className="flex items-center gap-2">
-          <span className="text-2xl text-green-700">
-            <LucideStar size={16} />
-          </span>
-          <Link
-            href={siteConfig.reviews.tripadvisor.link}
-            className="text-sm text-green-700"
-          >
-            Rated {siteConfig.reviews.tripadvisor.rating}/5 in Tripadvisor
-          </Link>
-        </div>
-      </div>
-
       {/* AT A GLANCE Section */}
       <div>
         <div className="font-bold mb-2">AT A GLANCE</div>

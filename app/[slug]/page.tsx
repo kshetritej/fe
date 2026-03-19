@@ -10,9 +10,14 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Script from "next/script";
-import { LucideImage } from "lucide-react";
+import { LucideImage, LucideInfo } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionNavigation } from "@/components/section-nav";
+import Link from "next/link";
+import { siteConfig } from "@/lib/siteConfig";
+import TripAdvisorRatingBadge from "@/components/tripadvisor-rating-badge";
+import GoogleRatingBadge from "@/components/google-rating-badge";
+import { Separator } from "@/components/ui/separator";
 
 export async function generateMetadata({
   params,
@@ -28,9 +33,8 @@ export async function generateMetadata({
   const trip = data.data;
 
   return {
-    title: trip.seo?.metaTitle || "Limestone Treks",
-    description:
-      trip.seo.metaDescription || "Explore the beauty of Limestone Treks",
+    title: trip.seo?.metaTitle,
+    description: trip.seo.metaDescription,
     openGraph: {
       title: trip.seo.metaTitle,
       description: trip.seo.metaDescription,
@@ -39,7 +43,7 @@ export async function generateMetadata({
           url: trip?.seo?.featuredMedia,
           width: 800,
           height: 600,
-          alt: trip?.seo?.metaTitle || "Limestone Treks",
+          alt: trip?.seo?.metaTitle,
         },
       ],
     },
@@ -51,7 +55,7 @@ export async function generateMetadata({
           url: trip?.seo?.featuredMedia,
           width: 800,
           height: 600,
-          alt: trip?.seo?.metaTitle || "Limestone Treks",
+          alt: trip?.seo?.metaTitle,
         },
       ],
     },
@@ -92,7 +96,7 @@ export default async function TripPage({
   const mainImage = trip.images[0];
   const otherImages = trip.images.slice(1) || [];
   return (
-    <main className="min-h-screen p-2">
+    <main className="min-h-screen p-2 bg-primary/5">
       {/*Schema */}
       {trip.seo?.schema && (
         <Script
@@ -104,6 +108,24 @@ export default async function TripPage({
           }}
         ></Script>
       )}
+      <div className="container mx-auto py-4 md:py-8">
+        <h1 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-4">
+          {trip.title}
+        </h1>
+        <div className="flex items-center gap-2">
+          <Link
+            href={siteConfig.reviews.tripadvisor.link}
+            className="text-sm text-green-700"
+          >
+            {/*Rated {siteConfig.reviews.tripadvisor.rating}/5 in Tripadvisor*/}
+            <div className="flex md:gap-4 flex-col md:flex-row items-start gap-1">
+              <TripAdvisorRatingBadge />
+              <Separator orientation="vertical" />
+              <GoogleRatingBadge />
+            </div>
+          </Link>
+        </div>
+      </div>
 
       {/*Images in Lightbox*/}
       {trip.images && trip.images.length > 0 && (
@@ -131,7 +153,10 @@ export default async function TripPage({
                 </div>
               ))}
             </div>
-            <Button className="absolute top-2 left-2" variant={"secondary"}>
+            <Button
+              className="absolute top-2 left-2 opacity-45 font-black text-xs"
+              variant={"secondary"}
+            >
               <LucideImage /> {trip.images.length} Photo(s)
             </Button>
           </div>
@@ -139,8 +164,8 @@ export default async function TripPage({
       )}
 
       {/*Content starts */}
+      <SectionNavigation />
       <div className="container mx-auto">
-        <SectionNavigation />
         <div className="grid md:grid-cols-4 gap-4 min-w-0">
           <div className="col-span-3 min-w-0!">
             <TripOverview trip={trip} />
@@ -167,8 +192,7 @@ export default async function TripPage({
       prose-li:before:left-0
       prose-li:before:top-[0.45em]
       prose-li:before:w-4 prose-li:before:h-4
-      prose-li:before:mask-[url('/icons/bullet.png')]
-      prose-li:before:rotate-90
+      prose-li:before:mask-[url('/icons/highlight.png')]
       prose-li:before:mask-contain
       prose-li:before:mask-no-repeat
       prose-li:before:bg-primary
@@ -197,8 +221,12 @@ export default async function TripPage({
               />
               {trip.additionalInfo.length > 0 && (
                 <>
-                  <h2 id="trip-info" className="font-bold text-xl my-4">
-                    Trip Information
+                  <h2
+                    id="trip-info"
+                    className="font-bold  my-4 flex items-center gap-2"
+                  >
+                    <LucideInfo className="size-8 text-primary" /> Trip
+                    Information
                   </h2>
                   {/*<Accordion collapsible type="single" className="w-full! mb-8">*/}
                   {trip.additionalInfo.map((info: any, idx: any) => {

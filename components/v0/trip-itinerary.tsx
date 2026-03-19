@@ -6,10 +6,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { Badge } from "../ui/badge";
 import {
+  LucideBookText,
   LucideChevronDown,
   LucideChevronUp,
+  LucideCircle,
   LucideClock,
   LucideHandPlatter,
   LucideMinus,
@@ -48,13 +49,25 @@ export function TripItinerary({ trip }: TripItineraryProps) {
           }}
         />
       </div>
-      <div id="itinerary">
-        <h2 className="font-bold text-2xl">Detailed Itinerary</h2>
-        <Accordion type="single" collapsible defaultValue="1">
-          <div className="flex flex-col gap-1 relative border-b">
+      <div id="itinerary" className="pb-4">
+        <h2 className="font-bold flex gap-2 items-center">
+          <LucideBookText className="size-8 text-primary" /> Detailed Itinerary
+        </h2>
+        <Accordion
+          type="single"
+          collapsible
+          defaultValue="1"
+          className="border-l-2 border-dashed border-primary px-4 py-0 my-0"
+        >
+          <div className="flex flex-col gap-1 ">
             {trip.itinerary.map((day, index) => (
-              <AccordionItem key={index} value={index.toString()}>
-                <AccordionTrigger className="font-bold text-md p-0 flex items-center prose-h3:p-0 prose-h3:m-0 prose-h3:leading-0 hover:no-underline">
+              <AccordionItem
+                key={index}
+                value={index.toString()}
+                className="relative"
+              >
+                <LucideCircle className="absolute top-7.5 -ml-6.5  size-4 fill-white stroke-primary" />
+                <AccordionTrigger className="font-bold text-md p-0 m-0 flex items-center justify-between prose-h3:p-0 prose-h3:m-0 prose-h3:leading-0 hover:no-underline">
                   <h3 className="flex items-center gap-4">{day.title}</h3>
                 </AccordionTrigger>
                 <AccordionContent className="text-base">

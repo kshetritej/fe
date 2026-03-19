@@ -1,3 +1,4 @@
+import { siteConfig } from "@/lib/siteConfig";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,17 +8,19 @@ export default function TripAdvisorRatingBadge() {
       <Image
         src={"/assets/tripadvisor.avif"}
         height={50}
-        width={150}
+        width={100}
         alt="tripadvisor logo"
       />
       <span className="font-bold text-muted-foreground">
-        5.0 Rating out of 5 based on{" "}
+        {siteConfig.reviews.tripadvisor.rating} Rating out of 5 based on{" "}
         <Link
-          href="https://www.tripadvisor.com/"
+          href={
+            "https://www.tripadvisor.com/Attraction_Review-g293891-d34042144-Reviews-Essence_Treks-Pokhara_Gandaki_Zone_Western_Region.html"
+          }
           className="underline hover:text-primary"
           target="_blank"
         >
-          150 Reviews
+          {siteConfig.reviews.tripadvisor.count} Reviews
         </Link>
       </span>
     </div>

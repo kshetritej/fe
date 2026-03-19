@@ -36,14 +36,14 @@ export const siteConfig = {
   },
   reviews: {
     googleReview: {
-      count: 0,
-      rating: 0,
+      count: 267,
+      rating: 4.9,
       link: "#",
     },
     tripadvisor: {
-      count: 0,
+      count: 2,
       rating: 5,
-      link: "#",
+      link: "https://www.tripadvisor.com/Attraction_Review-g293891-d34042144-Reviews-Essence_Treks-Pokhara_Gandaki_Zone_Western_Region.html",
     },
   },
   gmb: {

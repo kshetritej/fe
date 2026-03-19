@@ -82,33 +82,35 @@ export function SectionNavigation() {
   };
 
   return (
-    <nav
-      className="sticky top-[var(--section-nav-top)] z-50 bg-background shadow-y-sm pt-2 border-y my-4 py-2"
+    <div
+      className="sticky top-[var(--section-nav-top)] z-50 bg-white shadow-y-sm  border-y my-4 "
       style={
         {
           "--section-nav-top": `${offsetTop}px`,
         } as React.CSSProperties
       }
     >
-      <div className="flex">
-        <div className="flex gap-8 overflow-x-auto scrollbar-hide">
-          {sections.map(({ id, label, icon: Icon }) => (
-            <Button
-              variant={"ghost"}
-              key={id}
-              onClick={() => handleNavClick(id)}
-              className={`py-4 px-1 text-base  whitespace-nowrap  transition-colors flex items-center gap-1  ${
-                activeSection === id
-                  ? "border-gray-900 text-gray-900"
-                  : "border-transparent text-gray-500 hover:text-gray-900"
-              }`}
-            >
-              {Icon && <Icon className="" />}
-              {label}
-            </Button>
-          ))}
+      <nav className="container mx-auto">
+        <div className="flex">
+          <div className="flex gap-8 overflow-x-auto scrollbar-hide">
+            {sections.map(({ id, label, icon: Icon }) => (
+              <Button
+                variant={"ghost"}
+                key={id}
+                onClick={() => handleNavClick(id)}
+                className={` text-base  whitespace-nowrap  transition-colors flex items-center gap-1  ${
+                  activeSection === id
+                    ? "border-gray-900 rounded-none bg-primary text-white py-2"
+                    : "border-transparent text-gray-500 hover:text-gray-900 rounded-none py-2"
+                }`}
+              >
+                {Icon && <Icon className="" />}
+                {label}
+              </Button>
+            ))}
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }
