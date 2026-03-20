@@ -14,7 +14,7 @@ export async function FeaturedTrip() {
 
   return (
     <Link
-      href={`/${activity.slug}`}
+      href={`/package/${activity.slug}`}
       className="md:min-h-[80vh] flex flex-col items-center justify-center px-4"
     >
       <div className="relative max-w-5xl mx-auto py-8">

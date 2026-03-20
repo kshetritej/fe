@@ -23,11 +23,13 @@ export default async function OurTeam() {
         <div key={deptId} className="p-8 max-w-5xl mx-auto">
           {/* Department Name */}
           <h2 className="font-black text-2xl mb-4">
+            {/*@ts-expect-error no type mentioned*/}
             {members[0]?.department?.name}
           </h2>
 
           {/* Members */}
           <div className="grid gap-4">
+            {/*@ts-expect-error no type mentioned*/}
             {members.map((member) => (
               <TeamCard
                 key={member.id}

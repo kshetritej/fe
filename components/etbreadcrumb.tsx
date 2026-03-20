@@ -61,7 +61,7 @@ export function MyBreadCrumb({ items }: Readonly<{ items?: BCItem[] }>) {
   if (!items || items.length === 0) return renderDefault();
 
   return (
-    <Breadcrumb className="px-2 py-4 bg-white w-full shadow-none z-9">
+    <Breadcrumb className="px-2 py-4  w-full shadow-none z-9">
       <BreadcrumbList>
         {items.map((it, idx) => (
           <span key={idx} className="flex items-center">

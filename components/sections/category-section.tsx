@@ -10,7 +10,7 @@ export default async function CategorySection() {
   const categories = data.tripCategories;
 
   const categoriesExceptDefault = categories.filter(
-    (cat) => cat.categoryHandle !== "default",
+    (cat: any) => cat.categoryHandle !== "default",
   );
 
   return (

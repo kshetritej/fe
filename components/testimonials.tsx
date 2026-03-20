@@ -138,9 +138,11 @@ export default function Testimonials() {
             </div>
           </Link>
         </div>
-        <Button className="w-fit rounded-xs font-bold">
-          More about us <ChevronRight />
-        </Button>
+        <Link href={"/about-us"}>
+          <Button className="w-fit rounded-xs font-bold">
+            More about us <ChevronRight />
+          </Button>
+        </Link>
       </div>
     </div>
   );

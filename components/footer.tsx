@@ -26,7 +26,7 @@ export default async function Footer() {
         <div>
           <h3 className="font-black text-xl">Company</h3>
           <ul className="flex gap-2 flex-col">
-            {items.map((item) => (
+            {items.map((item: any) => (
               <Link key={item.slug} href={`/${item.slug}`}>
                 <li>{item.title}</li>
               </Link>
@@ -37,7 +37,7 @@ export default async function Footer() {
         <div>
           <h3 className="font-black text-xl">Travel Guides</h3>
           <ul className="flex gap-2 flex-col">
-            {guides.map((item) => (
+            {guides.map((item: any) => (
               <Link key={item.slug} href={`/${item.slug}`}>
                 <li>{item.title}</li>
               </Link>

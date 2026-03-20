@@ -44,18 +44,21 @@ export default function TocCard() {
     <Accordion
       type="single"
       collapsible
-      className="m-4 w-full! rounded-sm border p-4 bg-accent/60 backdrop-blur-md col-span-2 sticky top-42 self-start hidden md:block"
+      className="m-4 w-full! rounded-sm border p-4 bg-accent/60 backdrop-blur-md col-span-2 sticky top-24 self-start hidden md:block"
       defaultValue="item-1"
     >
       <AccordionItem value="item-1">
         <AccordionTrigger>
-          <h3 className="font-semibold text-xl">In this article:</h3>
+          <h3 className="font-semibold text-xl">In this page:</h3>
         </AccordionTrigger>
         <AccordionContent className="flex flex-col gap-4 text-balance text-lg">
-          <ScrollArea className="h-[60vh]">
+          <ScrollArea className="h-72">
             <ul className="space-y-1">
               {Object.entries(headings).map(([id, text]) => (
-                <li key={id} className="flex items-start">
+                <li
+                  key={id}
+                  className="flex items-start border-b border-dashed"
+                >
                   <span className="mx-2">-</span>
                   <a
                     href={`#${id}`}
