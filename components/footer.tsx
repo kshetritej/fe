@@ -1,28 +1,47 @@
 import { siteConfig } from "@/lib/siteConfig";
 import { LucideMail, LucideMapPin, LucidePhone } from "lucide-react";
+import Link from "next/link";
 import { CgFacebook, CgInstagram, CgTwitter, CgYoutube } from "react-icons/cg";
 
-export default function Footer() {
+export default async function Footer() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/published?category=company`,
+  );
+
+  const json = await res.json();
+
+  const items = json.blogs;
+
+  const res2 = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/published?category=travel-guide`,
+  );
+
+  const json2 = await res2.json();
+
+  const guides = json2.blogs;
+
   return (
     <div className="bg-black">
       <div className="flex  flex-col-reverse gap-8 lg:grid lg:grid-cols-4 container mx-auto text-white py-12 px-4">
         <div>
-          <h3 className="font-black text-xl">Best Seller</h3>
+          <h3 className="font-black text-xl">Company</h3>
           <ul className="flex gap-2 flex-col">
-            <li>Langtang Valley Trek</li>
-            <li>Langtang Valley Trek</li>
-            <li>Langtang Valley Trek</li>
-            <li>Langtang Valley Trek</li>
+            {items.map((item) => (
+              <Link key={item.slug} href={`/${item.slug}`}>
+                <li>{item.title}</li>
+              </Link>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h3 className="font-black text-xl">Main Activities</h3>
+          <h3 className="font-black text-xl">Travel Guides</h3>
           <ul className="flex gap-2 flex-col">
-            <li>Treeking in Nepal</li>
-            <li>Tours in Nepal</li>
-            <li>Day Tours in Nepal</li>
-            <li>Heli Tours in Nepal</li>
+            {guides.map((item) => (
+              <Link key={item.slug} href={`/${item.slug}`}>
+                <li>{item.title}</li>
+              </Link>
+            ))}
           </ul>
         </div>
 

@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunitoSans.className} antialiased`}>
+      <body className={`${outfit.className} antialiased`}>
         <Navigation />
         {children}
         <Analytics />

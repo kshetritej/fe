@@ -7,7 +7,7 @@ import { Badge } from "../ui/badge";
 export default function TripCard({ trip }: { trip: any }) {
   return (
     <Link
-      href={`/${trip.canonicalPath || trip.slug} `}
+      href={`/package/${trip.canonicalPath || trip.slug} `}
       className="p-4 min-w-64  md:min-w-md hover:-translate-y-0.5 duration-300 flex flex-col items-start group hover:shadow-b-sm rounded-sm"
     >
       <div className="max-w-md overflow-hidden rounded-t-sm h-42 md:h-72">

@@ -27,9 +27,9 @@ export default function TestimonialCard({
         {/*<p className="text-black font-bold">
           My First Nepal Hiking Experience at Pikey Peak – A Memorable Adventure
         </p>*/}
-        <p className="text-black">
+        <div className="text-black">
           <ScrollArea className="h-32">{review}</ScrollArea>
-        </p>
+        </div>
         <div className="flex gap-4 items-center">
           <div className="rounded-full size-16 bg-slate-100 flex items-center justify-center text-black font-black">
             {name.charAt(0).toUpperCase()}
